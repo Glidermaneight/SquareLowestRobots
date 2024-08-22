@@ -7,7 +7,7 @@
 int main() {
   printf("running");
   char code[] = "int x = 5 * (5 + 5)";
-  Token** iterator = tokenize(code);
+  Token* iterator = tokenize(code);
   printf("\n%d\n", iterator == NULL);
   /*while (iterator != NULL) {
     printf("Value: %s ", iterator->value);
@@ -16,6 +16,6 @@ int main() {
     iterator = iterator->next;          // Move to the next token
     removeToken(&iterator, temp->value); // Remove the token from the list
   }*/
-  parseBack(&iterator);
+  parseForward(&iterator);
   return 0;
 }

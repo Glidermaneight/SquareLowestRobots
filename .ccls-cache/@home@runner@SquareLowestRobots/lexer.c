@@ -48,8 +48,6 @@ Token* addToken(Token** headToken, const char* value, TokenType type) {
   newToken->value = strdup(value);
   newToken->type = type;
   newToken->next = *headToken;
-  (*headToken)->prev = (Token*)(*headToken)->prev;
-  (*headToken)->prev = newToken;
   *headToken = newToken;
   return newToken;
 }
@@ -77,7 +75,7 @@ int removeToken(Token **headToken, char *value) {
   return 0; // Not found
 }
 
-Token **tokenize(char *sourceCode) {
+Token *tokenize(char *sourceCode) {
   Token *tokens = NULL;
   char *src = sourceCode;
 
@@ -135,7 +133,6 @@ Token **tokenize(char *sourceCode) {
       src++;
     }
   }
-  Token **ref_tokens = &tokens;
   addToken(&tokens, "End of File", EOF);
-  return ref_tokens;
+  return tokens;
 }

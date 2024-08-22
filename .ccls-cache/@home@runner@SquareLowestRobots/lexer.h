@@ -34,4 +34,4 @@ Token* addToken(Token **headToken, const char* value, TokenType type);
 
 int removeToken(Token** headToken, char* value);
 
-Token** tokenize(char* sourceCode);
+Token* tokenize(char* sourceCode);
