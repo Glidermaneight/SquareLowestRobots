@@ -44,16 +44,26 @@ static char shift(char **str) {
 
 // Add a new token to the token list
 Token* addToken(Token** headToken, const char* value, TokenType type) {
-  Token* newToken = malloc(sizeof(Token));
-  newToken->value = strdup(value);
-  newToken->type = type;
-  newToken->next = *headToken;
-  *headToken = newToken;
-  return newToken;
+    Token* newToken = malloc(sizeof(Token));
+    newToken->value = strdup(value);
+    newToken->type = type;
+    newToken->next = NULL;
+    if (*headToken == NULL) {
+      newToken->prev = NULL;
+      *headToken = newToken;
+    } else {
+      Token* temp = *headToken;
+      while (temp->next != NULL) {
+          temp = temp->next;
+      }
+      temp->next = newToken;
+      newToken->prev = temp;
+    }
+    return newToken;
 }
 
 // Remove a token from the token list
-int removeToken(Token **headToken, char *value) {
+int removeToken(Token** headToken, char *value) {
   Token *current = *headToken;
   Token *prev = NULL;
 
